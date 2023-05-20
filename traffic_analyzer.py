@@ -352,19 +352,13 @@ def send_traffic_by_protocol():
             time.sleep(INFO_DELAY)
             json = encode_traffic_by_protocol()
 
-            response = (
-                'HTTP/1.1 200 OK\r\n'
-                'Content-Type: application/json\r\n'
-                'Access-Control-Allow-Origin: *\r\n'
-                'Access-Control-Allow-Headers: Content-Type\r\n'
-                'Access-Control-Allow-Methods: GET, POST, OPTIONS\r\n'
-                f'Content-Length: {len(json)}\r\n'
-                '\r\n'
-                f'{json}\r\n'
-            )
+            # Modificado para transmitir sem headers
+            response = (f'{json}')
 
             try:
-                client_socket.sendall(response.encode())
+                # Modificado para verificar se o buffer contém dados antes de enviar
+                if len(response):
+                    client_socket.sendall(response.encode())
             except (ConnectionResetError, ConnectionRefusedError, ConnectionAbortedError, BrokenPipeError):
                 print(f"Connection problem on port {PORT_PROTOCOL_TRAFFIC}")
                 client_socket, client_address = attempt_socket_reconnection(protocol_socket, PORT_PROTOCOL_TRAFFIC, 5)
@@ -401,19 +395,13 @@ def send_traffic_by_process():
             get_connections()
             json = encode_traffic_by_process()
 
-            response = (
-                'HTTP/1.1 200 OK\r\n'
-                'Content-Type: application/json\r\n'
-                'Access-Control-Allow-Origin: *\r\n'
-                'Access-Control-Allow-Headers: Content-Type\r\n'
-                'Access-Control-Allow-Methods: GET, POST, OPTIONS\r\n'
-                f'Content-Length: {len(json)}\r\n'
-                '\r\n'
-                f'{json}\r\n'
-            )
+            # Modificado para transmitir sem headers
+            response = (f'{json}')
 
             try:
-                client_socket.sendall(response.encode())
+                # Modificado para verificar se o buffer contém dados antes de enviar
+                if len(response):
+                    client_socket.sendall(response.encode())
             except (ConnectionResetError, ConnectionRefusedError, ConnectionAbortedError, BrokenPipeError):
                 print(f"Connection problem on port {PORT_NETWORK_TRAFFIC}")
                 client_socket, client_address = attempt_socket_reconnection(process_socket, PORT_NETWORK_TRAFFIC, 5)
@@ -449,19 +437,13 @@ def send_traffic_by_host():
             time.sleep(INFO_DELAY)
             json = encode_traffic_by_host()
             
-            response = (
-                'HTTP/1.1 200 OK\r\n'
-                'Content-Type: application/json\r\n'
-                'Access-Control-Allow-Origin: *\r\n'
-                'Access-Control-Allow-Headers: Content-Type\r\n'
-                'Access-Control-Allow-Methods: GET, POST, OPTIONS\r\n'
-                f'Content-Length: {len(json)}\r\n'
-                '\r\n'
-                f'{json}\r\n'
-            )
+            # Modificado para transmitir sem headers
+            response = (f'{json}')
 
             try:
-                client_socket.sendall(response.encode())
+                # Modificado para verificar se o buffer contém dados antes de enviar
+                if len(response):
+                    client_socket.sendall(response.encode())
             except (ConnectionResetError, ConnectionRefusedError, ConnectionAbortedError, BrokenPipeError):
                 print(f"Connection problem on port {PORT_HOSTNAME_TRAFFIC}")
                 client_socket, client_address = attempt_socket_reconnection(process_socket, PORT_HOSTNAME_TRAFFIC, 5)
